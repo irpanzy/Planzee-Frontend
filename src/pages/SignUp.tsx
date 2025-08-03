@@ -1,14 +1,14 @@
-import React from 'react'
+import { useDocumentTitle } from "@/components/hooks/useDocumentTitle";
 
 export default function SignUp() {
+  
+  useDocumentTitle("Sign Up | Planzee");
+
   return (
     <>
-      <head>
-        <title>Sign Up | Planzee</title>
-      </head>
       <div>
         <h1>Sign Up</h1>
       </div>
     </>
-  )
+  );
 }

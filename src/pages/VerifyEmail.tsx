@@ -1,14 +1,13 @@
-import React from 'react'
+import { useDocumentTitle } from "@/components/hooks/useDocumentTitle";
 
 export default function VerifyEmail() {
+  useDocumentTitle("Verify Email | Planzee");
+  
   return (
     <>
-      <head>
-        <title>Verify Email | Planzee</title>
-      </head>
       <div>
         <h1>Verify Email</h1>
       </div>
     </>
-  )
+  );
 }

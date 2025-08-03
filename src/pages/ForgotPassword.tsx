@@ -1,11 +1,11 @@
-import React from "react";
+import { useDocumentTitle } from "@/components/hooks/useDocumentTitle";
 
 export default function ForgotPassword() {
+
+  useDocumentTitle("Forgot Password | Planzee");
+  
   return (
     <>
-      <head>
-        <title>Forgot Password | Planzee</title>
-      </head>
       <div>
         <h1>Forgot Password</h1>
       </div>

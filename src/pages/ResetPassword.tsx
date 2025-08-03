@@ -1,11 +1,11 @@
-import React from "react";
+import { useDocumentTitle } from "@/components/hooks/useDocumentTitle";
 
 export default function ResetPassword() {
+
+  useDocumentTitle("Reset Password | Planzee");
+
   return (
     <>
-      <head>
-        <title>Reset Password | Planzee</title>
-      </head>
       <div>
         <h1>Reset Password</h1>
       </div>
