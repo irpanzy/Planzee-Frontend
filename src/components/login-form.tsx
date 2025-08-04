@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import type { UseFormReturn } from "react-hook-form";
 
 interface LoginFormValues {
@@ -21,16 +23,14 @@ export function LoginForm({
   className,
   ...props
 }: LoginFormProps) {
-  const {
-    register,
-    formState: { errors },
-  } = form;
+  const { register } = form;
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card className="overflow-hidden p-0">
-        <CardContent className="grid p-0 md:grid-cols-2">
-          <form onSubmit={onSubmit} className="p-6 md:p-8">
+      <Card className="w-full mx-auto overflow-hidden p-0 shadow-lg">
+        <CardContent className="grid grid-cols-1 md:grid-cols-2 p-0">
+          <form onSubmit={onSubmit} className="p-6 sm:p-8 md:p-10">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">Welcome back</h1>
@@ -45,14 +45,9 @@ export function LoginForm({
                 <Input
                   id="email"
                   type="email"
-                  placeholder="m@example.com"
+                  placeholder="email@example.com"
                   {...register("email")}
                 />
-                {errors.email && (
-                  <p className="text-sm text-red-500">
-                    {/* {errors.email.message} */}
-                  </p>
-                )}
               </div>
 
               {/* Password */}
@@ -60,41 +55,34 @@ export function LoginForm({
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
                   <a
-                    href="#"
+                    href="/forgot-password"
                     className="ml-auto text-sm underline-offset-2 hover:underline"
                   >
                     Forgot your password?
                   </a>
                 </div>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  {...register("password")}
-                />
-                {errors.password && (
-                  <p className="text-sm text-red-500">
-                    {/* {errors.password.message} */}
-                  </p>
-                )}
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter your password"
+                    {...register("password")}
+                    className="pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+                    tabIndex={-1}
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
               </div>
 
               <Button type="submit" className="w-full cursor-pointer">
                 Login
               </Button>
-
-              {/* 
-              Continue with
-              <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-                <span className="bg-card text-muted-foreground relative z-10 px-2">
-                  Or continue with
-                </span>
-              </div> */}
-
-              {/* Social Buttons (unchanged) */}
-              {/* <div className="grid grid-cols-3 gap-4"> */}
-                {/* ... buttons for Apple, Google, Meta ... */}
-              {/* </div> */}
 
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
