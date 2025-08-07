@@ -7,24 +7,27 @@ import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import type { UseFormReturn } from "react-hook-form";
 
-interface LoginFormValues {
+interface RegisterFormValues {
+  name: string;
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
-interface LoginFormProps extends React.ComponentProps<"div"> {
-  form: UseFormReturn<LoginFormValues>;
+interface RegisterFormProps extends React.ComponentProps<"div"> {
+  form: UseFormReturn<RegisterFormValues>;
   onSubmit: (e: React.FormEvent) => void;
 }
 
-export function LoginForm({
+export function RegisterForm({
   form,
   onSubmit,
   className,
   ...props
-}: LoginFormProps) {
+}: RegisterFormProps) {
   const { register } = form;
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -33,10 +36,20 @@ export function LoginForm({
           <form onSubmit={onSubmit} className="p-6 sm:p-8 md:p-10">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
-                <h1 className="text-2xl font-bold">Welcome back</h1>
+                <h1 className="text-2xl font-bold">Welcome</h1>
                 <p className="text-muted-foreground text-balance">
-                  Login to your Planzee account
+                  Register to your Planzee account
                 </p>
+              </div>
+
+              {/* Name */}
+              <div className="grid gap-1.5">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  placeholder="Your name"
+                  {...register("name")}
+                />
               </div>
 
               {/* Email */}
@@ -52,15 +65,7 @@ export function LoginForm({
 
               {/* Password */}
               <div className="grid gap-1.5">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                  <a
-                    href="/forgot-password"
-                    className="ml-auto text-sm underline-offset-2 hover:underline"
-                  >
-                    Forgot your password?
-                  </a>
-                </div>
+                <Label htmlFor="password">Password</Label>
                 <div className="relative">
                   <Input
                     id="password"
@@ -80,14 +85,43 @@ export function LoginForm({
                 </div>
               </div>
 
-              <Button type="submit" className="w-full cursor-pointer">
-                Login
+              {/* Confirm Password */}
+              <div className="grid gap-1.5">
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <div className="relative">
+                  <Input
+                    id="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder="Confirm your password"
+                    {...register("confirmPassword")}
+                    className="pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword((prev) => !prev)}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+                    tabIndex={-1}
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff size={18} />
+                    ) : (
+                      <Eye size={18} />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              <Button
+                type="submit"
+                className="bg-[#578FCA] text-white hover:bg-[#4a7eb8] w-full cursor-pointer"
+              >
+                Register
               </Button>
 
               <div className="text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <a href="/sign-up" className="underline underline-offset-4">
-                  Sign up
+                Already have an account?{" "}
+                <a href="/sign-in" className="underline underline-offset-4">
+                  Sign in
                 </a>
               </div>
             </div>
@@ -96,7 +130,7 @@ export function LoginForm({
           {/* Image Section */}
           <div className="bg-muted relative hidden md:block">
             <img
-              src="/images/bg-login.jpg"
+              src="/images/bg-register.jpg"
               alt="Image"
               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
             />

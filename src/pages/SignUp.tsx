@@ -2,7 +2,7 @@ import z from "zod";
 import { SignUpSchema } from "@/lib/schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterForm } from "@/components/register-form";
+import { RegisterForm } from "@/components/auth/RegisterForm";
 import { useDocumentTitle } from "@/components/hooks/useDocumentTitle";
 import { toast } from "sonner";
 
