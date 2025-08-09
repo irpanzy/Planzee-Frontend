@@ -3,7 +3,7 @@ import { SignInSchema } from "@/lib/schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginForm } from "@/components/auth/LoginForm";
-import { useDocumentTitle } from "@/components/hooks/useDocumentTitle";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { toast } from "sonner";
 
 type SignInFormData = z.infer<typeof SignInSchema>;

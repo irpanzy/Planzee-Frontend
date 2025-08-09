@@ -15,11 +15,13 @@ interface LoginFormValues {
 interface LoginFormProps extends React.ComponentProps<"div"> {
   form: UseFormReturn<LoginFormValues>;
   onSubmit: (e: React.FormEvent) => void;
+  isLoading?: boolean;
 }
 
 export function LoginForm({
   form,
   onSubmit,
+  isLoading = false,
   className,
   ...props
 }: LoginFormProps) {
@@ -82,9 +84,10 @@ export function LoginForm({
 
               <Button
                 type="submit"
-                className="bg-[#578FCA] text-white hover:bg-[#4a7eb8] w-full cursor-pointer"
+                disabled={isLoading}
+                className="bg-[#578FCA] text-white hover:bg-[#4a7eb8] w-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Login
+                {isLoading ? "Logging in..." : "Login"}
               </Button>
 
               <div className="text-center text-sm">

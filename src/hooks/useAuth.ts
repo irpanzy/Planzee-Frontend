@@ -1,5 +1,8 @@
 import { useContext } from "react";
 import { AuthContext } from "@/provider/AuthContext";
+import { useMutation } from "@tanstack/react-query";
+import type { SignUpFormData } from "@/pages/SignUp";
+import { postData } from "@/api/auth";
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -9,4 +12,10 @@ export const useAuth = () => {
   }
 
   return context;
+};
+
+export const useSignUpMutation = () => {
+  return useMutation({
+    mutationFn: (data: SignUpFormData) => postData("/auth/sign-up", data),
+  });
 };

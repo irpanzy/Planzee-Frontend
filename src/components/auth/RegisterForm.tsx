@@ -17,11 +17,13 @@ interface RegisterFormValues {
 interface RegisterFormProps extends React.ComponentProps<"div"> {
   form: UseFormReturn<RegisterFormValues>;
   onSubmit: (e: React.FormEvent) => void;
+  isLoading?: boolean;
 }
 
 export function RegisterForm({
   form,
   onSubmit,
+  isLoading = false,
   className,
   ...props
 }: RegisterFormProps) {
@@ -113,9 +115,10 @@ export function RegisterForm({
 
               <Button
                 type="submit"
-                className="bg-[#578FCA] text-white hover:bg-[#4a7eb8] w-full cursor-pointer"
+                disabled={isLoading}
+                className="bg-[#578FCA] text-white hover:bg-[#4a7eb8] w-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Register
+                {isLoading ? "Registering..." : "Register"}
               </Button>
 
               <div className="text-center text-sm">

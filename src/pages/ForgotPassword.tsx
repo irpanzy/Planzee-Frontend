@@ -1,4 +1,4 @@
-import { useDocumentTitle } from "@/components/hooks/useDocumentTitle";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 export default function ForgotPassword() {
 

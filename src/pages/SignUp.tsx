@@ -3,12 +3,15 @@ import { SignUpSchema } from "@/lib/schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterForm } from "@/components/auth/RegisterForm";
-import { useDocumentTitle } from "@/components/hooks/useDocumentTitle";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { toast } from "sonner";
+import { useSignUpMutation } from "@/hooks/useAuth";
 
-type SignUpFormData = z.infer<typeof SignUpSchema>;
+export type SignUpFormData = z.infer<typeof SignUpSchema>;
 
 export default function SignUp() {
+  const { mutate, isPending } = useSignUpMutation();
+
   const form = useForm<SignUpFormData>({
     resolver: zodResolver(SignUpSchema),
     defaultValues: {
@@ -20,8 +23,11 @@ export default function SignUp() {
   });
 
   const handleOnSubmit = (data: SignUpFormData) => {
-    console.log("Registering with:", data);
-    toast.success("Registration successful!");
+    mutate(data, {
+      onSuccess: () => {
+        toast.success("Registration successful!");
+      },
+    });
   };
 
   const handleInvalidSubmit = () => {
@@ -37,6 +43,7 @@ export default function SignUp() {
     <RegisterForm
       form={form}
       onSubmit={form.handleSubmit(handleOnSubmit, handleInvalidSubmit)}
+      isLoading={isPending}
     />
   );
 }
