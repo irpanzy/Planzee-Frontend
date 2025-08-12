@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import type { UseFormReturn } from "react-hook-form";
+import { Link } from "react-router";
 
 interface RegisterFormValues {
   name: string;
@@ -123,9 +124,12 @@ export function RegisterForm({
 
               <div className="text-center text-sm">
                 Already have an account?{" "}
-                <a href="/sign-in" className="underline underline-offset-4">
+                <Link
+                  to="/auth/sign-in"
+                  className="underline underline-offset-4"
+                >
                   Sign in
-                </a>
+                </Link>
               </div>
             </div>
           </form>
@@ -142,8 +146,9 @@ export function RegisterForm({
       </Card>
 
       <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
+        By clicking continue, you agree to our{" "}
+        <Link to="#">Terms of Service</Link> and{" "}
+        <Link to="#">Privacy Policy</Link>.
       </div>
     </div>
   );

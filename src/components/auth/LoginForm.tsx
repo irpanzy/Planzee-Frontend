@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import type { UseFormReturn } from "react-hook-form";
+import { Link } from "react-router";
 
 interface LoginFormValues {
   email: string;
@@ -56,12 +57,12 @@ export function LoginForm({
               <div className="grid gap-1.5">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
-                  <a
-                    href="/forgot-password"
+                  <Link
+                    to="/auth/forgot-password"
                     className="ml-auto text-sm underline-offset-2 hover:underline"
                   >
                     Forgot your password?
-                  </a>
+                  </Link>
                 </div>
                 <div className="relative">
                   <Input
@@ -92,9 +93,9 @@ export function LoginForm({
 
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
-                <a href="/sign-up" className="underline underline-offset-4">
+                <Link to="/auth/sign-up" className="underline underline-offset-4">
                   Sign up
-                </a>
+                </Link>
               </div>
             </div>
           </form>
@@ -111,8 +112,9 @@ export function LoginForm({
       </Card>
 
       <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
+        By clicking continue, you agree to our{" "}
+        <Link to="#">Terms of Service</Link> and{" "}
+        <Link to="#">Privacy Policy</Link>.
       </div>
     </div>
   );
